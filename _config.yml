@@ -1,0 +1,89 @@
+# Welcome to Jekyll!
+
+# Website settings
+title: "DuanZhaoQian"
+description: "zhaoqian's blog,use Jekyll and github pages."
+keywords: "zhaoqian,duanzhaoqian,blog,段朝骞,github,gh-pages"
+
+baseurl: "/"
+url: "www.duanzhaoqian.com"
+# url: "http://127.0.0.1:4000"
+
+# author
+author:
+  name: 'DuanZhaoQian'
+  first_name: 'zhaoqian'
+  last_name: 'duan'
+  email: 'duanzhaoqian@outlook.com'
+  facebook_username: ''
+  github_username: 'duanzhaoqian'
+  head_img: 'static/img/landing/Jack.jpg'
+
+# social link
+#jingyu:
+#  first_name: 'Yu'
+#  last_name: 'Jing'
+#  description: 'Painter.'
+#  link: 'http://angular.jack003.com'
+#  email: '805963294@qq.com'
+
+# landing page
+landing:
+  home: 'Home'
+  about: 'About'
+  career: 'Career'
+  skills: 'Skills'
+  projects: 'Project'
+  blog: 'Blog'
+  link: 'Link'
+
+# my projects
+#project:
+#  saplatform:
+#    name: 'Saplatform'
+#    url: '/Jack614/saplatform'
+#    img: 'static/img/landing/saplatform.jpg'
+#  jalpc:
+#    name: 'Jalpc'
+#    url: '/Jack614/jalpc_jekyll_theme'
+#    img: 'static/img/landing/jekyll.jpg'
+#  angularjs:
+#    name: 'Jalpc-A'
+#    url: '/Jack614/Jalpc-A'
+#    img: 'static/img/landing/angularjs.jpg'
+
+# blog index
+index:
+  home: 'Home'
+  python: 'Python'
+  linux: 'Linux'
+  html: 'HTML'
+  database: 'Database'
+  mac: 'Mac'
+  life: 'Life'
+
+# donate
+donate:
+  wechat: 'static/img/pay/wechat.png'
+  alipay: 'static/img/pay/alipay.png'
+
+
+
+
+# baidu analytics
+ba:
+  uuid: f259df62b106b184dcdef65ffedff7cf
+
+
+# blog img path
+img_path: '/static/img/blog'
+
+# Build settings
+encoding: "utf-8"
+
+# other settings
+highlighter: rouge
+markdown: kramdown
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
