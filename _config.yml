@@ -6,7 +6,7 @@ description: "zhaoqian's blog,use Jekyll and github pages."
 keywords: "zhaoqian,duanzhaoqian,blog,段朝骞,github,gh-pages"
 
 baseurl: "/"
-url: "www.duanzhaoqian.com"
+url: "duanzhaoqian.com"
 # url: "http://127.0.0.1:4000"
 
 # author
