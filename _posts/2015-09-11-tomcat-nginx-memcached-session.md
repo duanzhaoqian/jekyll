@@ -4,9 +4,9 @@ title:  "tomcat + memcached + nginx 实现session共享"
 date:   2015-09-11
 desc: "tomcat + memcached + nginx 实现session共享"
 keywords: "linux,tomcat,memcached,nginx,session,share"
-categories: [Linux]
+categories: [Java]
 tags: [tomcat, memcached, nginx, session]
-icon: fa-linux
+icon: ico-tomcat
 ---
 
 

@@ -20,7 +20,7 @@
                 <div class="navbar-header page-scroll">
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
                         <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar">ttt</span>
+                        <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
@@ -30,12 +30,12 @@
                     <ul class="nav navbar-nav navbar-right">
                         <li><a class="page-scroll" href="/blog/">{{ site.index.home }}</a></li>
 
-                        {% if page.title == site.index.python %}
+                        {% if page.title == site.index.java %}
                             <li class="active">
                         {% else %}
                             <li>
                         {% endif %}
-                            <a class="page-scroll" href="/python/">{{ site.index.python }}</a></li>
+                            <a class="page-scroll" href="/java/">{{ site.index.java }}</a></li>
 
                         {% if page.title == site.index.linux %}
                             <li class="active">

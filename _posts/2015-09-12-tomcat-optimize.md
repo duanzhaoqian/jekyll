@@ -4,7 +4,7 @@ title:  "tomcat配置优化参数"
 date:   2015-9-12
 desc: "tomcat配置优化参数"
 keywords: "linux,tomcat,optimize,优化"
-categories: [Linux]
+categories: [Java]
 tags: [tomcat, 优化]
 icon: icon-tomcat
 ---
