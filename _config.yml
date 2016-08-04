@@ -40,7 +40,7 @@ index:
 
 # donate
 donate:
-  wechat: 'static/img/pay/wechat.png'
+  wechat: 'static/img/pay/wechat.jpg'
   alipay: 'static/img/pay/alipay.png'
 
 
