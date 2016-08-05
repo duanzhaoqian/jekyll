@@ -78,7 +78,7 @@ slave7.kiwenlau.com  172.17.0.9:7946   alive
 
 ```bash
 
-
+{% raw %}
 
 #!/bin/bash
 
@@ -124,7 +124,7 @@ done
 # create a new Bash session in the master container
 sudo docker exec -it master bash
 
-
+{% endraw %}
 ```
 
 
