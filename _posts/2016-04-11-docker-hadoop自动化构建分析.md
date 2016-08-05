@@ -10,13 +10,18 @@ icon: icon-hadoop
 ---
 
 # Docker Hadoop自动化构建分析
+
 docker hadoop 自动化
+
 ## 使用软件 
+
 serf dnsmasq
 
 ## 说明
+
 ### serf (注册中心)
-所有slave join master机器，处理 serf members 返回值到 /etc/dnsmasq.d/0hosts文件
+
+所有slave join master机器，处理 serf members 返回值到 `/etc/dnsmasq.d/0hosts`文件
 
 ```
 root@master:~# serf members
@@ -35,11 +40,13 @@ slave7.kiwenlau.com  172.17.0.9:7946   alive
 
 
 ### dnsmasq (dns服务器)
+
 1. 配置/etc/resolv.conf 指向dns服务器127.0.0.1
 2. 利用serf解析members数据添加address 解析 hostname和ip到 /etc/dnsmasq.d/0hosts文件
 3. 使用service dnsmqsq restart 重启dnsmasq使其生效
 
 #### kiwenlau/hadoop-master各命令位置及启动顺序
+
 1. 使用docker -w 控制工作目录在/root --dns 127.0.0.1 修改/etc/resolv.conf文件nameserver 127.0.0.1 
 
 2. /root/start-ssh-serf.sh 启动ssh服务（所有镜像使用同一个rsa key实现免密码登录）
@@ -47,24 +54,32 @@ slave7.kiwenlau.com  172.17.0.9:7946   alive
 	```
 	service ssh start
 	```
+	
 3. 启动start-serf-agent.sh 并输出日志到serf_log
 
 	```
 	/etc/serf/start-serf-agent.sh > serf_log &
 	```
+	
 4. 启动 dnsmqsq服务
 
 	```
 	service dnsmasq start
 	```
+	
 5. 输出$JOIN_IP（docker 启动使用 -e JOIN_IP=  设置环境变量）到join.json
 6. 启动 serf
 （master机器无JOIN_IP变量，各slave机器有JOIN_IP变量）
 
 
+
 ## Docker Hadoop启动脚本备份
 
-```
+
+```bash
+
+
+
 #!/bin/bash
 
 # run N slave containers
@@ -109,5 +124,7 @@ done
 # create a new Bash session in the master container
 sudo docker exec -it master bash
 
+
 ```
+
 
