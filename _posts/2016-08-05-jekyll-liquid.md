@@ -27,7 +27,7 @@ This file is created by Marboo<http://marboo.io> template file $MARBOO_HOME/.med
 
 ```
 去掉% }间的空格
-{% raw % }
+{ % raw % }
   In Handlebars, {{ this }} will be HTML-escaped, but {{{ that }}} will not.
-{% endraw % }
+{ % endraw % }
 ```
