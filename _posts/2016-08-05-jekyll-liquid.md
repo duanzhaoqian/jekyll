@@ -6,7 +6,7 @@ desc: "jekyll-liquid遇到的问题"
 keywords: "jekyll-liquid遇到的问题"
 categories: [Linux]
 tags: [jekyll,liquid]
-icon: icon-jekyll
+icon: fa-jekyll
 ---
 
 # jekyll-liquid
