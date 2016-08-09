@@ -26,8 +26,11 @@ This file is created by Marboo<http://marboo.io> template file $MARBOO_HOME/.med
 临时禁止执行 Jekyll Tag 命令，在生成的内容里存在冲突的语法片段的情况下很有用。
 
 ```
+{% raw %}
 去掉% }间的空格
 { % raw % }
   In Handlebars, {{ this }} will be HTML-escaped, but {{{ that }}} will not.
 { % endraw % }
+
+{% endraw %}
 ```
