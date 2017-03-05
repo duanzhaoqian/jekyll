@@ -1,7 +1,7 @@
 # Welcome to Jekyll!
 
 # Website settings
-title: "DuanZhaoQian"
+title: "段朝骞"
 description: "zhaoqian's blog,use Jekyll and github pages."
 keywords: "zhaoqian,duanzhaoqian,blog,段朝骞,github,gh-pages"
 
@@ -11,7 +11,7 @@ url: "duanzhaoqian.com"
 
 # author
 author:
-  name: 'DuanZhaoQian'
+  name: '段朝骞'
   first_name: 'zhaoqian'
   last_name: 'duan'
   email: 'duanzhaoqian@outlook.com'
