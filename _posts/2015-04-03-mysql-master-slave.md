@@ -191,18 +191,18 @@ compact = N
 compressed = N
 encrypted = N
 ```
-
+mysql -u root -p连接操作
 ```
-change master to master_host='20.0.1.118';
-change master to master_port=3306;
-change master to master_user='mysync';
-change master to master_log_file='mysql-bin.000010';
-change master to master_log_pos=131585830;
+mysql>change master to master_host='20.0.1.118';
+mysql>change master to master_port=3306;
+mysql>change master to master_user='mysync';
+mysql>change master to master_log_file='mysql-bin.000010';
+mysql>change master to master_log_pos=131585830;
 ```
 设置只读
 ```
-set global read_only=1;
-show global variables like 'read_only';
+mysql>set global read_only=1;
+mysql>show global variables like 'read_only';
 ```
 1032错误
 ```
