@@ -55,7 +55,7 @@ log_bin_trust_function_creators=1
 
 （1）在主数据库上创建用于主从复制的账户（192.168.100.3换成你的从数据库IP）：
 
-``` sql
+``` 
 GRANT REPLICATION SLAVE ON *.* TO 'repl'@'192.168.100.3' IDENTIFIED BY 'repl';
 ```
 
@@ -67,14 +67,13 @@ FLUSH TABLES WITH READ LOCK;
 
 （3）然后克隆一个SSH会话窗口，在这个窗口打开MySQL命令行：
 
-``` sql
+``` 
 SHOW MASTER STATUS;
 +——————---------------——+—------——-+——------——–+——————+——————-+
 | File                  | Position | Binlog_Do_DB | Binlog_Ignore_DB | Executed_Gtid_Set |
 +—————---------------———+——------—-+——------——–+——————+——————-+
 | mysqlmaster-bin.000001 |   332   |           |      |       |
 +—————---------------———+—------——-+—------———–+——————+——————-+
-
 1 row in set (0.00 sec)
 exit;
 ```
@@ -92,7 +91,7 @@ exit;
 
 （5）解锁第（2）步主数据的锁表操作：
 
-``` sql
+``` 
 UNLOCK TABLES;
 ```
 
@@ -113,20 +112,20 @@ UNLOCK TABLES;
 
 `#mysql -uroot -p`
 
-mysql>``` sql
-CHANGE MASTER TO MASTER_HOST='192.168.100.2',MASTER_USER='repl',MASTER_PASSWORD='repl',MASTER_LOG_FILE='mysqlmaster-bin.000001',MASTER_LOG_POS=332;
+``` 
+mysql>CHANGE MASTER TO MASTER_HOST='192.168.100.2',MASTER_USER='repl',MASTER_PASSWORD='repl',MASTER_LOG_FILE='mysqlmaster-bin.000001',MASTER_LOG_POS=332;
 ```
 
 然后启动从数据库的复制线程：
 
-mysql>``` sql
-START slave;
+```
+mysql>START slave;
 ```
 
 接着查询数据库的slave状态：
 
-mysql>``` sql
-SHOW slave STATUS \G
+```
+mysql> SHOW slave STATUS \G;
 ```
 
 如果下面两个参数都是Yes，则说明主从配置成功！
@@ -140,3 +139,80 @@ Slave_SQL_Running: Yes
 
 大功告成。
 
+# 安装percona-xtrabackup主从同步数据
+
+## 安装percona-xtrabackup
+
+```
+rpm -Uhv https://www.percona.com/redir/downloads/percona-release/redhat/latest/percona-release-0.1-4.noarch.rpm
+rpm -ivh http://dl.fedoraproject.org/pub/epel/6/x86_64/libev-4.03-3.el6.x86_64.rpm
+yum -y install percona-xtrabackup
+```
+
+## master操作
+
+```
+innobackupex --user root --password ync365.com ./ 备份
+tar -cvf 118.tar ./2017-03-17_14-14-56/ 打包
+scp 118.tar root@20.0.1.115:~/118/
+```
+
+## slave操作
+
+```
+service mysqld stop
+rm -rf /var/lib/mysql/*
+cp -r ~/118/2017-03-17_14-14-56/ /var/lib/mysql
+chown -R mysql:mysql /var/lib/mysql/*
+cat /var/lib/mysql/xtrabackup_info
+service mysqld start
+```
+
+cat /var/lib/mysql/xtrabackup_info
+
+```
+uuid = 5e4129de-0ad9-11e7-8d03-b083fee38281
+name = 
+tool_name = innobackupex
+tool_command = --user root --password=... ync365.com /root/
+tool_version = 2.3.7
+ibbackup_version = 2.3.7
+server_version = 5.6.31-log
+start_time = 2017-03-17 14:14:56
+end_time = 2017-03-17 14:17:16
+lock_time = 0
+binlog_pos = filename 'mysql-bin.000010', position '131585830'
+innodb_from_lsn = 0
+innodb_to_lsn = 20989977102
+partial = N
+incremental = N
+format = file
+compact = N
+compressed = N
+encrypted = N
+```
+
+```
+change master to master_host='20.0.1.118';
+change master to master_port=3306;
+change master to master_user='mysync';
+change master to master_log_file='mysql-bin.000010';
+change master to master_log_pos=131585830;
+```
+设置只读
+```
+set global read_only=1;
+show global variables like 'read_only';
+```
+1032错误
+```
+Error_code: 1032; handler error HA_ERR_KEY_NOT_FOUND;
+在my.cnf里面，设置slave-skip-errors=1032  然后从新启动mysql数据库
+```
+
+centos 6.7 yum安装mysql
+
+```
+rpm -ivh http://dev.mysql.com/get/mysql-community-release-el6-5.noarch.rpm
+yum install mysql-server -y
+```
