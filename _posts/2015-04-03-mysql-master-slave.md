@@ -216,3 +216,106 @@ centos 6.7 yum安装mysql
 rpm -ivh http://dev.mysql.com/get/mysql-community-release-el6-5.noarch.rpm
 yum install mysql-server -y
 ```
+
+# MySQL 5.6.35 主从配置文件 
+
+E5-2603 v2 8核 32G内存
+
+master 
+```
+# For advice on how to change settings please see
+# http://dev.mysql.com/doc/refman/5.6/en/server-configuration-defaults.html
+[mysqld]
+datadir=/var/lib/mysql
+socket=/var/lib/mysql/mysql.sock
+log-bin=mysql-bin
+symbolic-links=0
+server_id=10001
+skip-external-locking
+lower_case_table_names=1
+default_storage_engine=InnoDB
+character_set_server=utf8
+max_connections=9000
+log_bin_trust_function_creators=TRUE
+binlog_format = MIXED
+transaction-isolation = READ-COMMITTED
+join_buffer_size=64M
+read_buffer_size = 10M
+read_rnd_buffer_size = 16M
+sort_buffer_size = 32M
+bulk_insert_buffer_size = 64M
+innodb_buffer_pool_size=11G
+innodb_log_buffer_size = 8M
+innodb_log_file_size = 256M
+innodb_log_files_in_group = 3
+innodb_max_dirty_pages_pct = 90
+innodb_file_per_table
+innodb_flush_method = O_DIRECT
+innodb_use_native_aio = 1
+innodb_write_io_threads = 8
+innodb_read_io_threads = 8
+innodb_thread_concurrency = 16
+innodb_flush_log_at_trx_commit = 2
+innodb_log_buffer_size = 8M
+thread_stack = 192K
+thread_cache_size = 8
+innodb_additional_mem_pool_size = 40M
+slow_query_log
+long_query_time = 1
+general_log=ON
+general_log_file=/tmp/mysql.log
+sql_mode=NO_ENGINE_SUBSTITUTION,PIPES_AS_CONCAT,ANSI_QUOTES,STRICT_TRANS_TABLES
+[client]
+default-character-set=utf8
+[mysqld_safe]
+log-error=/var/log/mysqld.log
+pid-file=/var/run/mysqld/mysqld.pid
+```
+
+slave
+```
+# For advice on how to change settings please see
+# http://dev.mysql.com/doc/refman/5.6/en/server-configuration-defaults.html
+[mysqld]
+datadir=/var/lib/mysql
+socket=/var/lib/mysql/mysql.sock
+symbolic-links=0
+server_id=105
+skip-external-locking
+lower_case_table_names=1
+default_storage_engine=InnoDB
+character_set_server=utf8
+max_connections=9000
+log_bin_trust_function_creators=TRUE
+binlog_format = MIXED
+transaction-isolation = READ-COMMITTED
+join_buffer_size=64M
+read_buffer_size = 10M
+read_rnd_buffer_size = 16M
+sort_buffer_size = 32M
+bulk_insert_buffer_size = 64M
+innodb_buffer_pool_size=11G
+innodb_log_buffer_size = 8M
+innodb_log_file_size = 256M
+innodb_log_files_in_group = 3
+innodb_max_dirty_pages_pct = 90
+innodb_file_per_table
+innodb_flush_method = O_DIRECT
+innodb_use_native_aio = 1
+innodb_write_io_threads = 8
+innodb_read_io_threads = 8
+innodb_thread_concurrency = 16
+innodb_flush_log_at_trx_commit = 2
+innodb_log_buffer_size = 8M
+thread_stack = 192K
+thread_cache_size = 8
+innodb_additional_mem_pool_size = 40M
+slow_query_log
+long_query_time = 1
+sql_mode=NO_ENGINE_SUBSTITUTION,PIPES_AS_CONCAT,ANSI_QUOTES,STRICT_TRANS_TABLES
+[client]
+default-character-set=utf8
+[mysqld_safe]
+log-error=/var/log/mysqld.log
+pid-file=/var/run/mysqld/mysqld.pid
+```
